@@ -2,7 +2,7 @@
 
 This project is the open source backend that powers the FusedVR ChainAuth APIs, which provides a simplified solution to Game Developers for one of the many difficulties when developing a Web 3 standalone game : **authenticating a player's non-custodial wallet to prove ownership of the tokens, NFTs, or other digital assets a player owns**
 
-The code base is written in Typescript / NodeJS with an Express server that powers the authentication and app management APIs that are exposed at crypto.fusedvr.com.
+The code base is written in Typescript / NodeJS with an Express server that powers the authentication and app management APIs that are exposed at [https://crypto.fusedvr.com](https://crypto.fusedvr.com).
 
 ## Requirements
 
@@ -11,25 +11,27 @@ The code base is written in Typescript / NodeJS with an Express server that powe
 
 ## Directory Overview
 
-├── src
-│   ├── controller
-│   ├── routes
-│   ├── utilities
-│   ├── server.js
-├── .github\workflows
-│   ├── build.yml
-│   ├── tests.yml
-├── tests
-├── ├── ControllerTests
-├── ├── RoutesTests
-├── ├── TestResources
-├── ├── UtilitiesTests
-├── moralis-cloud-function
-├── package.json
-├── package-lock.json 
-├── Dockerfile
-└── .gitignore
-└── .env.template
+```
+  ├── src                   # typescript source code
+  │   ├── controller
+  │   ├── routes
+  │   ├── utilities
+  │   ├── server.js
+  ├── .github\workflows     # github workflows
+  │   ├── build.yml
+  │   ├── tests.yml
+  ├── tests                 # test cases for the project
+  ├── ├── ControllerTests 
+  ├── ├── RoutesTests
+  ├── ├── TestResources
+  ├── ├── UtilitiesTests
+  ├── moralis-cloud-function # functions to be deployed to moralis parse server
+  ├── package.json           
+  ├── package-lock.json 
+  ├── Dockerfile     
+  └── .gitignore
+  └── .env.template
+```
 
 All the core typescript code is located in the src folder is broken into :
 - Controller : for all core logic is responsible for power the APIs
@@ -52,12 +54,13 @@ Once the environment file is setup, you can run the included Unit Tests with **n
 To run in development mode with a dev env file, you may use **npm run dev:start** or **npm run dev:build:start** to run the API server.
 To run in production mode with a prod env file, you may use **npm run prod:start** or **npm run prod:build:start** to run the API server.
 
-Once the backend is up, you can start calling the APIs. If you would like to connect this to a front end, please refer to the chainauth-console : https://github.com/FusedVR/chainauth-console. 
+Once the backend is up, you can start calling the APIs. If you would like to connect this to a front end, please refer to the chainauth-console : [https://github.com/FusedVR/chainauth-console](https://github.com/FusedVR/chainauth-console). 
 
 ## Environment variables
 
 The following is the template that is used to set the environment variables. 
 
+```
 MORALIS_APP_ID = YOUR KEY HERE
 MORALIS_URL = YOUR URL HERE
 MORALIS_MASTER_KEY = YOUR KEY HERE
@@ -75,8 +78,9 @@ JWT_EMAIL_SECRET_KEY = RANDOM KEY HERE
 JWT_EMAIL_EXPIRATION = TIME IN SECONDS HERE
 
 JWT_APP_SECRET_KEY = RANDOM KEY HERE
+```
 
-The first section contains variables for your Moralis server. You will need to setup a Moralis server, which can be self hosted following [their documentation])(https://v1docs.moralis.io/moralis-dapp/getting-started/self-hosting-moralis-server)
+The first section contains variables for your Moralis server. You will need to setup a Moralis server, which can be self hosted following [their documentation](https://v1docs.moralis.io/moralis-dapp/getting-started/self-hosting-moralis-server)
 
 The second section contains variables for which PORT and Domain is the node js server hosted on. 
 
@@ -86,11 +90,11 @@ The following sections are variables for Keys you would like to set up for makin
 
 ## Github Actions CI/CD
  
-The CI/CD pipelin will run tests and build the docker image, which can be deployed to Google Cloud. This requires a GCloud Service Key, which is created in an IAM like so https://cloud.google.com/iam/docs/creating-managing-service-account-keys 
+The CI/CD pipelin will run tests and build the docker image, which can be deployed to Google Cloud. This requires a GCloud Service Key, which is created in an IAM like so [https://cloud.google.com/iam/docs/creating-managing-service-account-keys](https://cloud.google.com/iam/docs/creating-managing-service-account-keys)
 
 The Key needs to be base64 encoded, which can be done with the following command:
 
-cat <json private key file> | base64 -w 0
+`cat <json private key file> | base64 -w 0`
 
 For the environment to be setup from the CI/CD you must add Github Secrets such as PROD_ENV_FILE which contain the JSON values for the environment variable. 
 
