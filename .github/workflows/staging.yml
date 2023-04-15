@@ -1,0 +1,21 @@
+name: Push to GCR GitHub Action
+on:
+  push:
+    branches:
+      - 0.3.0
+jobs:
+  build-and-push-to-gcr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set Production Env Var File
+        run: |
+          mkdir -p ./app/env
+          echo '${{ secrets.STAGING_ENV_FILE }}' > ./app/env/.env.prod
+      - uses: google-github-actions/setup-gcloud@v0
+      - uses: RafikFarhad/push-to-gcr-github-action@v4
+        with:
+          gcloud_service_key: ${{ secrets.GCLOUD_SERVICE_KEY }}
+          registry: us.gcr.io
+          project_id: web3-336917
+          image_name: fusedvr/crypto-stage

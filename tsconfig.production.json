@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+      "outDir": "./app",
+      "allowJs": true,
+      "removeComments": false,
+      "esModuleInterop": true,
+      "moduleResolution": "node",
+      "skipLibCheck": true,
+      "noImplicitAny": true,
+      "noImplicitReturns": true,
+      "strictNullChecks": true,
+      "noImplicitThis": true,
+      "sourceMap": false
+    },
+    "include": ["./src/**/*"],
+  }

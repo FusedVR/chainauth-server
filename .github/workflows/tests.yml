@@ -1,0 +1,22 @@
+name: Testing Pull Request
+on:
+  pull_request:
+    branches: [ master ]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Set up node 
+        uses: actions/setup-node@v1
+      - name: Install dependencies
+        run: npm install
+      - name: Build Typescript project
+        run: npm run prod:build
+      - name: Set Test Env Var File
+        run: |
+          mkdir -p ./app/env
+          echo '${{ secrets.TEST_ENV_FILE }}' > ./app/env/.env.dev
+      - name: Run tests 
+        run: npm test
